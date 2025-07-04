@@ -1,0 +1,3 @@
+[submodule "CHILS"]
+	path = CHILS
+	url = https://github.com/KennethLangedal/CHILS
