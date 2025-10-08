@@ -1,7 +1,7 @@
 SHELL = /usr/bin/env bash
 
 METIS_TO_JSON : main.c
-	$(CC) -std=gnu17 -g -O3 -march=native -DNDEBUG -o $@ $^ 
+	$(CC) -std=gnu17 -fopenmp -O3 -march=native -DNDEBUG -o $@ $^ 
 
 .PHONY : clean
 clean :

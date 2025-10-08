@@ -173,13 +173,22 @@ int main(int argc, char *argv[])
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
 
-    std::cout << elapsed.count() << std::endl;
+    // std::cout << elapsed.count() << std::endl;
 
     // Generate and print greedy solutions
     std::vector<mwis::index> greedy_solution(solver.no_orig());
+
+    long long best = 0;
     for (int i = 0; i < num_greedy_solutions; ++i)
     {
         solver.generate_greedy_solution(greedy_solution.begin(), greedy_solution.end());
+
+        long long cost = 0;
+        for (auto u : greedy_solution)
+            cost += solver.node_cost(u);
+
+        if (cost > best)
+            best = cost;
 
         // uncomment the line below and comment out the next one if you need binary representation
         // print_n_elements_as_json_binary(greedy_solution.begin(), greedy_solution.size(), "solution-" + std::to_string(i + 1));
@@ -190,6 +199,8 @@ int main(int argc, char *argv[])
         //     std::cout << ", ";
     }
     // std::cout << "}" << std::endl;
+
+    printf("%.4lf,%lld\n", elapsed.count(), best);
 
     return 0;
 }

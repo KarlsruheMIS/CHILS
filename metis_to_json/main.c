@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <omp.h>
 
 typedef struct
 {
@@ -63,26 +64,19 @@ int main(int argc, char **argv)
         }
     }
 
-    f = fopen(argv[2], "w");
+    int *T = malloc(sizeof(int) * g->m);
+    long long *TV = malloc(sizeof(long long) * g->m);
 
-    fprintf(f, "{\n\t\"nodes\": [\n");
-    for (int u = 0; u < g->n; u++)
-    {
-        if (u == g->n - 1)
-            fprintf(f, "\t\t%lld\n", g->W[u]);
-        else
-            fprintf(f, "\t\t%lld,\n", g->W[u]);
-    }
-    fprintf(f, "\t],\n\t\"cliques\": [\n");
-
-    int *T = malloc(sizeof(int) * g->n);
     int *M = malloc(sizeof(int) * g->n);
     for (int i = 0; i < g->n; i++)
         M[i] = 0;
 
     long long nc = 0;
     long long ncc = 0;
-    int first_print = 1;
+
+    double t0 = omp_get_wtime();
+
+    TV[0] = 0;
 
     for (int u = 0; u < g->n; u++)
     {
@@ -93,7 +87,7 @@ int main(int argc, char **argv)
 
             int v = g->E[i];
 
-            int cn = 0;
+            int cn = ncc;
             T[cn++] = u;
             T[cn++] = v;
 
@@ -131,27 +125,50 @@ int main(int argc, char **argv)
                 }
             }
 
-            if (!first_print)
-                fprintf(f, "\t\t],\n");
-
-            first_print = 0;
-
-            fprintf(f, "\t\t[\n");
-            for (int j = 0; j < cn; j++)
+            for (int j = ncc; j < cn; j++)
             {
                 M[T[j]] = 0;
-                if (j == cn - 1)
-                    fprintf(f, "\t\t\t%d\n", T[j]);
-                else
-                    fprintf(f, "\t\t\t%d,\n", T[j]);
             }
 
-            nc++;
-            ncc += cn;
+            TV[++nc] = cn;
+            ncc = cn;
         }
     }
 
-    printf("%lld %lld vs. %lld\n", nc, ncc, g->m);
+    double elapsed = omp_get_wtime() - t0;
+
+    printf("%lld,%lld,%.4lf\n", nc, ncc, elapsed);
+
+    f = fopen(argv[2], "w");
+
+    fprintf(f, "{\n\t\"nodes\": [\n");
+    for (int u = 0; u < g->n; u++)
+    {
+        if (u == g->n - 1)
+            fprintf(f, "\t\t%lld\n", g->W[u]);
+        else
+            fprintf(f, "\t\t%lld,\n", g->W[u]);
+    }
+    fprintf(f, "\t],\n\t\"cliques\": [\n");
+
+    int first_print = 1;
+
+    for (int i = 0; i < nc; i++)
+    {
+        if (!first_print)
+            fprintf(f, "\t\t],\n");
+        first_print = 0;
+
+        fprintf(f, "\t\t[\n");
+
+        for (long long j = TV[i]; j < TV[i + 1]; j++)
+        {
+            if (j == TV[i + 1] - 1)
+                fprintf(f, "\t\t\t%d\n", T[j]);
+            else
+                fprintf(f, "\t\t\t%d,\n", T[j]);
+        }
+    }
 
     fprintf(f, "\t\t]\n\t]\n}\n");
     fclose(f);
@@ -163,6 +180,7 @@ int main(int argc, char **argv)
     free(E_start);
 
     free(T);
+    free(TV);
     free(M);
 
     return 0;
