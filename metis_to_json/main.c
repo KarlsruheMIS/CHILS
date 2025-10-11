@@ -18,6 +18,26 @@ graph *graph_parse(FILE *f);
 
 void graph_free(graph *g);
 
+int intersection(const int *A, int n, const int *B, int m, int *C)
+{
+    int i = 0, j = 0, k = 0;
+    while (i < n && j < m)
+    {
+        if (A[i] < B[j])
+            i++;
+        else if (A[i] > B[j])
+            j++;
+        else
+        {
+            C[k] = A[i];
+            i++;
+            j++;
+            k++;
+        }
+    }
+    return k;
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 3)
@@ -39,6 +59,9 @@ int main(int argc, char **argv)
     long long *E_index = malloc(sizeof(long long) * g->m);
     long long *E_start = malloc(sizeof(long long) * g->n);
     long long ei = 0;
+
+    int *Temp1 = malloc(sizeof(int) * g->n);
+    int *Temp2 = malloc(sizeof(int) * g->n);
 
     for (int u = 0; u < g->n; u++)
     {
@@ -96,34 +119,53 @@ int main(int argc, char **argv)
 
             E_mark[E_index[i]] = 0;
 
-            // for (long long j = i + 1; j < g->V[u + 1]; j++)
-            for (long long j = g->V[v]; j < g->V[v + 1]; j++)
+            int k = intersection(g->E + g->V[u], g->V[u + 1] - g->V[u], g->E + g->V[v], g->V[v + 1] - g->V[v], Temp1);
+            while (k > 0)
             {
-                int w = g->E[j];
-                if (M[w])
-                    continue;
-
-                int c = 0;
-                for (long long k = g->V[w]; k < g->V[w + 1]; k++)
+                int w = Temp1[0];
+                for (long long j = g->V[w]; j < g->V[w + 1]; j++)
                 {
-                    int z = g->E[k];
-                    c += M[z];
+                    int z = g->E[j];
+                    if (M[z])
+                        E_mark[E_index[j]] = 0;
                 }
-                if (c != cn)
-                    continue;
-
                 T[cn++] = w;
                 M[w] = 1;
 
-                for (long long k = g->V[w]; k < g->V[w + 1] && c < cn; k++)
-                {
-                    int z = g->E[k];
-                    if (M[z])
-                    {
-                        E_mark[E_index[k]] = 0;
-                    }
-                }
+                k = intersection(g->E + g->V[w], g->V[w + 1] - g->V[w], Temp1, k, Temp2);
+                int *t = Temp1;
+                Temp1 = Temp2;
+                Temp2 = t;
             }
+
+            // for (long long j = g->V[v]; j < g->V[v + 1]; j++)
+            // for (long long j = i + 1; j < g->V[u + 1]; j++)
+            // {
+            //     int w = g->E[j];
+            //     if (M[w])
+            //         continue;
+
+            //     int c = 0;
+            //     for (long long k = g->V[w]; k < g->V[w + 1]; k++)
+            //     {
+            //         int z = g->E[k];
+            //         c += M[z];
+            //     }
+            //     if (c != cn)
+            //         continue;
+
+            //     T[cn++] = w;
+            //     M[w] = 1;
+
+            //     for (long long k = g->V[w]; k < g->V[w + 1] && c < cn; k++)
+            //     {
+            //         int z = g->E[k];
+            //         if (M[z])
+            //         {
+            //             E_mark[E_index[k]] = 0;
+            //         }
+            //     }
+            // }
 
             for (int j = ncc; j < cn; j++)
             {
@@ -178,6 +220,9 @@ int main(int argc, char **argv)
     free(E_mark);
     free(E_index);
     free(E_start);
+
+    free(Temp1);
+    free(Temp2);
 
     free(T);
     free(TV);
