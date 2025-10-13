@@ -138,35 +138,6 @@ int main(int argc, char **argv)
                 Temp2 = t;
             }
 
-            // for (long long j = g->V[v]; j < g->V[v + 1]; j++)
-            // for (long long j = i + 1; j < g->V[u + 1]; j++)
-            // {
-            //     int w = g->E[j];
-            //     if (M[w])
-            //         continue;
-
-            //     int c = 0;
-            //     for (long long k = g->V[w]; k < g->V[w + 1]; k++)
-            //     {
-            //         int z = g->E[k];
-            //         c += M[z];
-            //     }
-            //     if (c != cn)
-            //         continue;
-
-            //     T[cn++] = w;
-            //     M[w] = 1;
-
-            //     for (long long k = g->V[w]; k < g->V[w + 1] && c < cn; k++)
-            //     {
-            //         int z = g->E[k];
-            //         if (M[z])
-            //         {
-            //             E_mark[E_index[k]] = 0;
-            //         }
-            //     }
-            // }
-
             for (int j = ncc; j < cn; j++)
             {
                 M[T[j]] = 0;

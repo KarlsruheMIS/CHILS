@@ -183,9 +183,13 @@ int main(int argc, char *argv[])
     {
         solver.generate_greedy_solution(greedy_solution.begin(), greedy_solution.end());
 
-        long long cost = 0;
-        for (auto u : greedy_solution)
-            cost += solver.node_cost(u);
+        long long cost = 0, index = 0;
+        for (auto val : greedy_solution)
+        {
+            if (val)
+                cost += solver.node_cost(index);
+            index++;
+        }
 
         if (cost > best)
             best = cost;

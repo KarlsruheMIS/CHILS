@@ -39,7 +39,8 @@ CHILS_TIMEOUT=$(echo "3600 - $METIS_TIME - $BSA_TIME" | bc)
 CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -f "$OUTPUT_DIR" -t "$CHILS_TIMEOUT" -c 4)
 
 # echo "5. Cleaning up..."
-rm -rf "$JSON_FILE" "$OUTPUT_DIR"
+rm -rf "$JSON_FILE"
+rm -rf "$OUTPUT_DIR"
 
 # echo "Done."
 
