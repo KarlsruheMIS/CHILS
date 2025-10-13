@@ -36,7 +36,7 @@ BSA_TIME=$(echo "$BSA_OUT" | awk -F',' '{print $1}')
 CHILS_TIMEOUT=$(echo "3600 - $METIS_TIME - $BSA_TIME" | bc)
 
 # echo "4. Running CHILS for $CHILS_TIMEOUT seconds..."
-CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -f "$OUTPUT_DIR" -t "$CHILS_TIMEOUT" -c 4)
+CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -f "$OUTPUT_DIR" -t "$CHILS_TIMEOUT" -c 1)
 
 # echo "5. Cleaning up..."
 rm -rf "$JSON_FILE"
