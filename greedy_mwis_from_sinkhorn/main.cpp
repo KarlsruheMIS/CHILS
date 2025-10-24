@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
 
     // Feed into solver
     mwis::solver solver;
+
     for (double cost : nodes)
     {
         solver.add_node(cost);
@@ -165,9 +166,9 @@ int main(int argc, char *argv[])
     // Measure execution time
     auto start = std::chrono::high_resolution_clock::now();
 
-    solver.run(50,      // batch size
-               1000000, // max number of batches
-               0.1      // relative duality gap
+    solver.dualRun(50,      // batch size
+                   1000000, // max number of batches
+                   0.1      // relative duality gap
     );
 
     auto end = std::chrono::high_resolution_clock::now();
