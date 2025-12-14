@@ -24,11 +24,15 @@ rm "$BASENAME"_weight.csv
 rm "$BASENAME".csv
 
 LR_TIME=$(echo "$LR_OUT" | awk -F',' '{print $11}')
+LR_N=$(echo "$LR_OUT" | awk -F',' '{print $8}')
 
 CHILS_TIMEOUT=$(echo "3600 - $LR_TIME" | bc)
 
-CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -t "$CHILS_TIMEOUT" -c 1)
+if [ "$FIELD_9" -eq 0 ]; then
+    echo "$LR_OUT"
+else
+    CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -t "$CHILS_TIMEOUT" -c 1)
+    echo "$LR_OUT,$CHILS_OUT"
+fi
 
 rm "$BASENAME".kernel_graph
-
-echo "$LR_OUT,$CHILS_OUT"
