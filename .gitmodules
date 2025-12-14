@@ -1,3 +1,6 @@
 [submodule "CHILS"]
 	path = CHILS
 	url = https://github.com/KennethLangedal/CHILS
+[submodule "LearnAndReduce"]
+	path = LearnAndReduce
+	url = https://github.com/KarlsruheMIS/LearnAndReduce.git

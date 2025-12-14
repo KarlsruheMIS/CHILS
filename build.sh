@@ -45,3 +45,16 @@ cp CHILS ../MWIS_CHILS
 make clean
 
 cd ..
+
+echo ""
+echo "*** Building Learn And Reduce ***"
+echo ""
+
+cd LearnAndReduce
+
+./compile_all.sh
+
+cp deploy/reduce ../MWIS_REDUCE
+cp -r models ../
+
+cd ../
