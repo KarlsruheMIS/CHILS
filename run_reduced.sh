@@ -18,21 +18,20 @@ fi
 # Make sure we are in the script's directory, so we can find the executables.
 cd "$(dirname "$0")"
 
-LR_OUT=$(./MWIS_REDUCE "$INPUT_FILE" --time_limit=1800 --kernel="$BASENAME" | tr -d '\n')
-
-rm "$BASENAME"_weight.csv
-rm "$BASENAME".csv
+LR_OUT=$(./MWIS_REDUCE "$INPUT_FILE" --time_limit=1800 --kernel="$BASENAME")
 
 LR_TIME=$(echo "$LR_OUT" | awk -F',' '{print $11}')
 LR_N=$(echo "$LR_OUT" | awk -F',' '{print $8}')
 
 CHILS_TIMEOUT=$(echo "3600 - $LR_TIME" | bc)
 
-if [ "$FIELD_9" -eq 0 ]; then
+if [ "$LR_N" -eq 0 ]; then
     echo "$LR_OUT"
 else
     CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -t "$CHILS_TIMEOUT" -c 1)
     echo "$LR_OUT,$CHILS_OUT"
-fi
 
-rm "$BASENAME".kernel_graph
+    rm "$BASENAME"_weight.csv
+    rm "$BASENAME".csv
+    rm "$BASENAME".kernel_graph
+fi
