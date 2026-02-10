@@ -29,7 +29,8 @@ METIS_OUT=$(./METIS_TO_JSON "$INPUT_FILE" "$JSON_FILE")
 mkdir -p "$OUTPUT_DIR"
 
 # echo "3. Running BSA_GREEDY..."
-BSA_OUT=$(./BSA_GREEDY "$JSON_FILE" 16)
+BSA_OUT=$(timeout -s SIGTERM 3600 ./BSA_GREEDY "$JSON_FILE" 16)
+
 
 METIS_TIME=$(echo "$METIS_OUT" | awk -F',' '{print $3}')
 BSA_TIME=$(echo "$BSA_OUT" | awk -F',' '{print $1}')

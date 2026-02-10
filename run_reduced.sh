@@ -28,7 +28,7 @@ CHILS_TIMEOUT=$(echo "3600 - $LR_TIME" | bc)
 if [ "$LR_N" -eq 0 ]; then
     echo "$LR_OUT"
 else
-    CHILS_OUT=$(./MWIS_CHILS -g "$INPUT_FILE" -t "$CHILS_TIMEOUT" -c 1)
+    CHILS_OUT=$(./MWIS_CHILS -g "$BASENAME".kernel_graph -t "$CHILS_TIMEOUT" -p 1)
     echo "$LR_OUT,$CHILS_OUT"
 
     rm "$BASENAME"_weight.csv
