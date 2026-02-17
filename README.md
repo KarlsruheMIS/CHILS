@@ -66,7 +66,7 @@ Examples of typical use cases are listed below. Naturally, change `-t` (time lim
 ### Sequential CHILS
 
 ```
-./CHILS -g [path] -p N -c 1
+./CHILS -g [path] -c 1
 ```
 
 ### Parallel CHILS
@@ -81,8 +81,37 @@ export OMP_PROC_BIND=spread
 And then run
 
 ```
-./CHILS -g [path] -p N
+./CHILS -g [path]
 ```
+
+## Python Interface
+
+You can also interact directly with CHILS through its Python API. Install CHILS for Python using
+
+```
+pip install CHILS
+```
+
+The following example illustrates how to run CHILS from Python. It creates a graph with three vertices and then runs the full CHILS algorithm using four concurrent solutions for 20 seconds.
+
+```python
+import chils
+
+solver = chils.CHILS()
+
+solver.add_vertex(10)
+solver.add_vertex(10)
+solver.add_vertex(20)
+
+solver.add_edge(0, 1)
+solver.add_edge(0, 2)
+
+solver.run_full(20.0, 4, 0)
+
+print(solver.get_solution_weight())
+```
+
+For more information, see the Python interface [repository](https://github.com/KennethLangedal/CHILS_Python), or the pypi [website](https://pypi.org/project/CHILS/).
 
 ## Input Format
 
