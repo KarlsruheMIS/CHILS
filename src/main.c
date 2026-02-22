@@ -131,9 +131,8 @@ const char *help = "CHILS --- Concurrent Hybrid Iterated Local Search\n"
 
 int main(int argc, char **argv)
 {
-    struct sigaction sa = {.sa_handler = handle_stop};
-    sigaction(SIGTERM, &sa, NULL);
-    sigaction(SIGINT, &sa, NULL);
+    signal(SIGTERM, handle_stop);
+    signal(SIGINT, handle_stop);
 
     char *graph_path = NULL,
          *initial_solution_path = NULL,
