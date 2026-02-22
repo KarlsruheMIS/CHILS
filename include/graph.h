@@ -1,5 +1,8 @@
 #pragma once
 #include <stdio.h>
+#include <signal.h>
+
+extern volatile sig_atomic_t keep_running;
 
 typedef struct
 {

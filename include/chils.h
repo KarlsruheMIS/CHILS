@@ -171,6 +171,13 @@ extern "C"
      */
     int *chils_solution_get_independent_set(void *solver);
 
+    /**
+     * @brief Requests the heuristic to stop gracefully.
+     * This function can be called from a signal handler or another thread to interrupt
+     * the process.
+     */
+    void chils_request_stop();
+
 #ifdef __cplusplus
 }
 #endif

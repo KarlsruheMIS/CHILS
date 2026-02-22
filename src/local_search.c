@@ -526,7 +526,7 @@ void local_search_explore(graph *g, local_search *ls, double tl, long long il, i
         if ((c++ & ((1 << 7) - 1)) == 0)
         {
             // c = 0;
-            if (omp_get_wtime() - start > tl)
+            if (omp_get_wtime() - start > tl || !keep_running)
                 break;
 
             if (verbose)

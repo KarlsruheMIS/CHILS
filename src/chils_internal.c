@@ -186,7 +186,7 @@ void chils_run(graph *g, chils *c, double tl, long long cl, int verbose)
         }
 
         long long ci = 0;
-        while (ci++ < cl && elapsed < tl)
+        while (ci++ < cl && elapsed < tl && keep_running)
         {
             /* Full graph LS */
 #pragma omp for

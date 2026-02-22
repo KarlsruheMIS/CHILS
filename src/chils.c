@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <limits.h>
 
+volatile sig_atomic_t keep_running = 1;
+
 typedef struct
 {
     int solver_mode;
@@ -301,4 +303,9 @@ int *chils_solution_get_independent_set(void *solver)
             res[p++] = i;
 
     return res;
+}
+
+void chils_request_stop()
+{
+    keep_running = 0;
 }

@@ -13,6 +13,13 @@
 #include "local_search.h"
 #include "chils_internal.h"
 
+volatile sig_atomic_t keep_running = 1;
+
+void handle_stop(int sig)
+{
+    keep_running = 0;
+}
+
 long long mwis_validate(graph *g, int *independent_set)
 {
     long long cost = 0;
@@ -124,6 +131,10 @@ const char *help = "CHILS --- Concurrent Hybrid Iterated Local Search\n"
 
 int main(int argc, char **argv)
 {
+    struct sigaction sa = {.sa_handler = handle_stop};
+    sigaction(SIGTERM, &sa, NULL);
+    sigaction(SIGINT, &sa, NULL);
+
     char *graph_path = NULL,
          *initial_solution_path = NULL,
          *initial_solution_folder_path = NULL,
