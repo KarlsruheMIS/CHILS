@@ -216,7 +216,15 @@ void chils_run_full(void *solver, double time_limit, int n_solutions, unsigned i
     }
 
     if (d->c == NULL)
+    {
         d->c = chils_init(d->g, n_solutions, seed);
+
+        for (int i = 0; i < n_solutions; i++)
+        {
+            d->c->LS[i]->max_queue += 4 * i;
+            d->c->LS_core[i]->max_queue += 4 * i;
+        }
+    }
 
     chils_run(d->g, d->c, time_limit, LLONG_MAX, 0);
 

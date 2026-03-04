@@ -302,7 +302,7 @@ void chils_set_solution(graph *g, chils *c, int i, const int *I)
 
 int *chils_get_best_independent_set(chils *c)
 {
-    int best = chils_find_first_best(c);
+    int best = chils_find_overall_best(c);
 
     return c->LS[best]->independent_set;
 }
