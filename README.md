@@ -179,6 +179,8 @@ Assuming chils.h and libCHILS.a resides in the same directory as the main.cpp, y
 g++ -fopenmp main.cpp -o prog -L. -lCHILS
 ```
 
+Note that when setting the input graph directly with the `chils_set_graph` function, the neighborhoods must be **sorted**. For the CLI and `chils_add_vertex`/`chils_add_edge`, the neighborhoods are sorted internally.
+
 ## Installation for macOS and Windows
 
 Here are some guidlines for use with other operating systems and compilers than GCC on linux. If you have issues compiling the code, it might help to check the [.github/workflows/github-actions.yml](.github/workflows/github-actions.yml) file for details on how we tested the code for these platforms. 
