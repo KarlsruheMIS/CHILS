@@ -1,7 +1,19 @@
 # CHILS &mdash; Concurrent Hybrid Iterated Local Search
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![C](https://img.shields.io/badge/C-GNU17-blue.svg)](https://gcc.gnu.org/)
 [![DOI](https://zenodo.org/badge/829941140.svg)](https://doi.org/10.5281/zenodo.15173363)
-[![Build and Test](https://github.com/KennethLangedal/CHILS/actions/workflows/github-actions.yml/badge.svg)](https://github.com/KennethLangedal/CHILS/actions/workflows/github-actions.yml)
+[![Build and Test](https://github.com/KarlsruheMIS/CHILS/actions/workflows/github-actions.yml/badge.svg)](https://github.com/KarlsruheMIS/CHILS/actions/workflows/github-actions.yml)
+[![SEA 2025](https://img.shields.io/badge/SEA-2025-brightgreen.svg)](https://doi.org/10.5281/zenodo.15173363)
+[![arXiv](https://img.shields.io/badge/arXiv-2412.14198-b31b1b.svg)](https://arxiv.org/abs/2412.14198)
+[![Linux](https://img.shields.io/badge/Linux-supported-success.svg)](https://github.com/KarlsruheMIS/CHILS)
+[![macOS](https://img.shields.io/badge/macOS-supported-success.svg)](https://github.com/KarlsruheMIS/CHILS)
+[![Homebrew](https://img.shields.io/badge/Homebrew-available-orange.svg)](https://github.com/KarlsruheMIS/homebrew-chils)
+[![PyPI](https://img.shields.io/pypi/v/CHILS.svg)](https://pypi.org/project/CHILS/)
+[![GitHub stars](https://img.shields.io/github/stars/KarlsruheMIS/CHILS.svg)](https://github.com/KarlsruheMIS/CHILS/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/KarlsruheMIS/CHILS.svg)](https://github.com/KarlsruheMIS/CHILS/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/KarlsruheMIS/CHILS.svg)](https://github.com/KarlsruheMIS/CHILS/commits)
+[![Agent-Ready](https://img.shields.io/badge/Agent--Ready-yes-blue)](https://github.com/KarlsruheMIS/CHILS)
+[![Heidelberg University](https://img.shields.io/badge/Heidelberg-University-c1002a)](https://www.uni-heidelberg.de)
 
 ![CHILS illustration](CHILS.png)
 
