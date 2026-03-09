@@ -7,7 +7,14 @@
 
 Part of the [KaMIS &mdash; Karlsruhe Maximum Independent Sets](https://github.com/KarlsruheMIS) open source framework to compute (weighted) independent sets and vertex covers.
 
-## Installation
+## Install via Homebrew
+
+```console
+brew install KarlsruheMIS/chils/chils
+CHILS -g network.graph -p 16 -t 60 -o solution.txt
+```
+
+## Installation (from source)
 
 On linux with GCC, compile the project by running
 ```
