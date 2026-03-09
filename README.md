@@ -19,6 +19,8 @@
 
 Part of the [KaMIS &mdash; Karlsruhe Maximum Independent Sets](https://github.com/KarlsruheMIS) open source framework to compute (weighted) independent sets and vertex covers.
 
+Given a vertex-weighted graph, the **Maximum Weight Independent Set (MWIS)** problem asks for a set of pairwise non-adjacent vertices whose total weight is maximized. The problem is NP-hard and among the most fundamental in combinatorial optimization, with applications in map labeling, computer vision, combinatorial auctions, molecular docking, and route planning. CHILS tackles MWIS using a concurrent hybrid iterated local search that maintains multiple solutions in parallel, alternating between independent local search phases and cooperative exchange phases to efficiently explore the solution space at scale.
+
 ## Install via Homebrew
 
 ```console
