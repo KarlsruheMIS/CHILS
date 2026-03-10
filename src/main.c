@@ -230,7 +230,7 @@ int main(int argc, char **argv)
 
     if (initial_solution_path != NULL)
     {
-        mwis_parse_solution(g, initial_solution_path, &initial_solution_weight);
+        initial_solution = mwis_parse_solution(g, initial_solution_path, &initial_solution_weight);
     }
 
     int path_offset = 0, path_end = 0;
